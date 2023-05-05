@@ -8,16 +8,19 @@ var searchButtonEl = document.querySelector('#searchButton');
 function getCityName(event) {
     event.preventDefault();
 
-    var cityNameEl = document.querySelector('#city-name').value.trim();
-    console.log(cityNameEl);
+    var cityName = document.querySelector('#city-name').value.trim();
+    console.log(cityName);
     
-    if (!cityNameEl) {
+    if (!cityName) {
         console.error("You must enter a search term!");
         return;
     }
 
-    // var searchQuery = 'search-results.html?q=' + searchTermEl + '&format=' + formatTypeEl;
-    // console.log(searchQuery);
+     
+    var searchQuery = 'search-results.html?q=' + cityName + '&APPID=' + apiKey;
+    console.log(searchQuery);
+
+    location.replace(searchQuery);
     
 }
 
