@@ -46,8 +46,9 @@ function getFiveDayForecast() {
     fetch(apiUrlFiveDay)
     .then(function(response) {
         response.json()
-        .then(function(results) {
-            console.log(results);
+        .then(function(predictions) {
+            console.log(predictions.list);
+            displayFiveDayForecast(predictions.list);
         })
     })
 }
@@ -75,7 +76,7 @@ function displayCurrentWeather(data) {
     
     // I found the character combo for the degrees symbol at Javascripter.net
     var currentTemperature = document.createElement('p');
-    currentTemperature.textContent = Math.floor(data.main.temp) + '\xB0 F';
+    currentTemperature.textContent = 'Current temp: ' + Math.floor(data.main.temp) + '\xB0 F';
     currentWeatherDiv.appendChild(currentTemperature);
 
     var windSpeed = document.createElement('p');
@@ -88,3 +89,48 @@ function displayCurrentWeather(data) {
 
 }
 
+function displayFiveDayForecast(predictions){
+    if(predictions.length === 0){
+        return;
+    }
+// do a for loop that increases by 1 to create the overall containers and the divs that will display the dates.
+// below that, you'll create the other elements and set their attributes 
+    var forecastDayOne = dayjs().add(1, 'day').format('M/D/YYYY');
+    var forecastDayTwo = dayjs().add(2, 'day').format('M/D/YYYY');
+    var forecastDayThree = dayjs().add(3, 'day').format('M/D/YYYY');
+    var forecastDayFour = dayjs().add(4, 'day').format('M/D/YYYY');
+    var forecastDayFive = dayjs().add(5, 'day').format('M/D/YYYY');
+    
+    var extendedForecastDays = [forecastDayOne, forecastDayTwo, forecastDayThree, forecastDayFour, forecastDayFive]
+    console.log(extendedForecastDays);
+
+    for (var i = 0, j = 7 ; i < 5; i++, j += 8) {
+        var fiveDayForecastCard = document.createElement('div');
+        fiveDayForecastCard.setAttribute('class', 'card');
+        fiveDayForecastDiv.append(fiveDayForecastCard);
+    
+        var forecastDateField = document.createElement('h5');
+        forecastDateField.textContent = extendedForecastDays[i];
+        fiveDayForecastCard.appendChild(forecastDateField);
+
+        var forecastWeatherIcon = document.createElement('img');
+        forecastWeatherIcon.classList.add('col-1')
+        var forecastWeatherIconVal = predictions[j].weather[0].icon;
+        console.log(forecastWeatherIconVal);
+        forecastWeatherIcon.src = `https://openweathermap.org/img/wn/${forecastWeatherIconVal}.png`
+        fiveDayForecastCard.appendChild(forecastWeatherIcon);
+
+        var currentTemperature = document.createElement('p');
+        currentTemperature.textContent = Math.ceil(predictions[j].main.temp_max) + '\xB0 F';
+        fiveDayForecastCard.appendChild(currentTemperature);
+    
+        var windSpeed = document.createElement('p');
+        windSpeed.textContent = 'Wind speed: ' + Math.ceil(predictions[j].wind.speed) + ' mph';
+        fiveDayForecastCard.appendChild(windSpeed);
+    
+        var humidityLevel = document.createElement('p');
+        humidityLevel.textContent = 'Humidity: ' + predictions[j].main.humidity + '%';
+        fiveDayForecastCard.appendChild(humidityLevel);
+
+    }
+}
