@@ -12,6 +12,7 @@ console.log(queryString);
 
 var apiUrlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=eb5cff2c542e454a13fb9d52a2a5c3ca&units=imperial`;
 console.log(apiUrlCurrent)
+
 function getCurrentWeather(){
     if(!queryString){
         return;
@@ -21,21 +22,39 @@ function getCurrentWeather(){
             response.json()
             .then(function (data){
                 console.log(data);
-                console.log(data.coord.lat);
+                var cityLatitude = data.coord.lat;
+                var cityLongitude = data.coord.lon;
+                localStorage.setItem('latitude', cityLatitude);
+                localStorage.setItem('longitude', cityLongitude);
             displayCurrentWeather(data)    
             });
 
     })
     
 }
-// a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-
-// function displayWeatherData() 
-
-
-
-
 getCurrentWeather();
+
+var cityLatitude5Day = localStorage.getItem('latitude');
+var cityLongitude5Day = localStorage.getItem('longitude');
+console.log(cityLatitude5Day);
+console.log(cityLongitude5Day);
+
+var apiUrlFiveDay = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLatitude5Day}&lon=${cityLongitude5Day}&appid=${apiKey}&units=imperial`
+console.log(apiUrlFiveDay);
+
+function getFiveDayForecast() {
+    fetch(apiUrlFiveDay)
+    .then(function(response) {
+        response.json()
+        .then(function(results) {
+            console.log(results);
+        })
+    })
+}
+
+getFiveDayForecast();
+
+
 
 function displayCurrentWeather(data) {
     var today = dayjs().format('M/D/YYYY');
