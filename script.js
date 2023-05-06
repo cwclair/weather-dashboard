@@ -20,6 +20,8 @@ function getCityName(event) {
     var searchQuery = 'search-results.html?q=' + cityName + '&APPID=' + apiKey;
     console.log(searchQuery);
 
+    localStorage.setItem(cityName, searchQuery);
+
     location.replace(searchQuery);
     
 }
