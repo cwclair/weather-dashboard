@@ -10,10 +10,10 @@ console.log(cityName);
 var queryString = document.location.search;
 console.log(queryString);
 
-var apiUrlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=eb5cff2c542e454a13fb9d52a2a5c3ca&units=imperial`;
+var apiUrlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${apiKey}&units=imperial`;
 console.log(apiUrlCurrent)
 
-function getCurrentWeather(){
+function getCurrentWeather() {
     if(!queryString){
         return;
     }
@@ -61,7 +61,7 @@ function displayCurrentWeather(data) {
     var today = dayjs().format('M/D/YYYY');
     
     var currentWeatherDiv = document.createElement('div');
-    currentWeatherDiv.setAttribute('class', 'card');
+    currentWeatherDiv.setAttribute('class', 'card mb-3 p-3');
     weatherDisplayDiv.append(currentWeatherDiv);
 
     var cityDisplayTitle = document.createElement('h3');
@@ -104,9 +104,13 @@ function displayFiveDayForecast(predictions){
     var extendedForecastDays = [forecastDayOne, forecastDayTwo, forecastDayThree, forecastDayFour, forecastDayFive]
     console.log(extendedForecastDays);
 
+    fiveDayForecastTitle = document.createElement('h3');
+    fiveDayForecastTitle.textContent = 'Five-Day Forecast';
+    fiveDayForecastDiv.append(fiveDayForecastTitle);
+
     for (var i = 0, j = 7 ; i < 5; i++, j += 8) {
         var fiveDayForecastCard = document.createElement('div');
-        fiveDayForecastCard.setAttribute('class', 'card');
+        fiveDayForecastCard.setAttribute('class', 'card col-6 col-md-2 p-2');
         fiveDayForecastDiv.append(fiveDayForecastCard);
     
         var forecastDateField = document.createElement('h5');
@@ -114,7 +118,7 @@ function displayFiveDayForecast(predictions){
         fiveDayForecastCard.appendChild(forecastDateField);
 
         var forecastWeatherIcon = document.createElement('img');
-        forecastWeatherIcon.classList.add('col-1')
+        forecastWeatherIcon.classList.add('col-3')
         var forecastWeatherIconVal = predictions[j].weather[0].icon;
         console.log(forecastWeatherIconVal);
         forecastWeatherIcon.src = `https://openweathermap.org/img/wn/${forecastWeatherIconVal}.png`
