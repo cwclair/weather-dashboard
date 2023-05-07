@@ -12,7 +12,7 @@
 <body>
     <h1>Weather Dashboard</h1>
 <div class="row">
-<div id="search-history-column" class="col-3">   
+<div class="col-3">   
     <form>
         <div class="mb-3">
             <h3>Search for a city:</h3>
@@ -21,16 +21,16 @@
         </div>
         <button type="submit" class="btn btn-primary col-12" id="searchButton">Search</button>
       </form>
+<div class="col-3" id="searchHistoryDiv">
 
 </div>
+</div>
+
 <div class="col-9">
-    <div id="weatherDisplayDiv"></div>
-    
-    <div id="fiveDayForecastDiv"></div>
-    </div>
-    </div>      
+<div id="weatherDisplayDiv"></div>
 
-
+<div id="fiveDayForecastDiv" class="row d-flex justify-content-around"></div>
+</div>
 </div>      
 
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
@@ -40,6 +40,7 @@
 sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
-     <script src="script.js"></script>
+    <!-- <script src="search-results.js"></script> -->
+    <script src="script.js"></script>
 </body>
 </html>

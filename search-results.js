@@ -18,9 +18,9 @@ function getCurrentWeather() {
         return;
     }
     fetch(apiUrlCurrent)
-    .then(function(response){
+    .then(function(response) {
             response.json()
-            .then(function (data){
+            .then(function (data) {
                 console.log(data);
                 var cityLatitude = data.coord.lat;
                 var cityLongitude = data.coord.lon;
@@ -102,8 +102,7 @@ function displayFiveDayForecast(predictions){
     var forecastDayFive = dayjs().add(5, 'day').format('M/D/YYYY');
     
     var extendedForecastDays = [forecastDayOne, forecastDayTwo, forecastDayThree, forecastDayFour, forecastDayFive]
-    console.log(extendedForecastDays);
-
+    
     fiveDayForecastTitle = document.createElement('h3');
     fiveDayForecastTitle.textContent = 'Five-Day Forecast';
     fiveDayForecastDiv.append(fiveDayForecastTitle);
