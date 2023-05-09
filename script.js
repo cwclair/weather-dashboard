@@ -3,9 +3,10 @@ var apiKey = "eb5cff2c542e454a13fb9d52a2a5c3ca";
 // Use the endpoint api.openweathermap.org for the API calls.
 // Example of API call: api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=eb5cff2c542e454a13fb9d52a2a5c3ca
 
+// global variable for the search button
 var searchButtonEl = document.querySelector("#searchButton");
-var cityNameEl = document.querySelector("#city-name");
 
+// function that reads the stored array of cities (if there is one) and creates an empty array if nothing is in storage 
 function readCitiesFromStorage() {
   var cities = localStorage.getItem("cities");
   if (cities) {
@@ -17,28 +18,28 @@ function readCitiesFromStorage() {
   return cities;
 }
 
+// saves the array of cities to local storage 
 function saveCitiesToStorage(cities) {
   localStorage.setItem("cities", JSON.stringify(cities));
 }
 
+// this calls the array back from storage, establishes an unordered list element on the left side of the page, appends the unordered list as a child to the larger search container div, then runs through the array of cities, creates list items (children elements) for each city, and displays them on the page 
 function addCitiesToPage() {
  
   var cities = readCitiesFromStorage();
+  var containerDiv = document.createElement('ul')
+  searchHistoryDiv.appendChild(containerDiv);    
 
   for (var i = 0; i < cities.length; i++) {
     var newCity = cities[i];
-    var containerDiv = document.createElement('div')
-    searchHistoryDiv.appendChild(containerDiv);    
-    var breakDiv = document.createElement('div')
-    breakDiv.innerHTML = '<br />'
-    containerDiv.append(breakDiv);
-    var newCityDiv = document.createElement("a");
-    newCityDiv.href = "index.html?q=" + newCity + "&APPID=" + apiKey;
+    var newCityDiv = document.createElement("li");
+    newCityDiv.setAttribute('class', 'historyEntry mt-1 p-1')
     newCityDiv.textContent = newCity;    
-    containerDiv.append(newCityDiv);
+    containerDiv.appendChild(newCityDiv);
   }
 }
 
+// event handler for the search button. it gets the value of the new city name from the form, adds the new cities to the cities array, saves that updated array to local storage, clears the existing search history display, displays the updated list on the page, and executes the API call for the current conditions and the extended forecast. the two display functions (current, five-day) are called here as well.
 searchButtonEl.addEventListener("click", getCityName);
 
 function getCityName(event) {
@@ -87,7 +88,7 @@ function getCityName(event) {
   });
 }
 
-
+// displays the current weather conditions at the top of the right side of the page
 function displayCurrentWeather(data) {
   var today = dayjs().format("M/D/YYYY");
 
@@ -123,6 +124,7 @@ function displayCurrentWeather(data) {
   currentWeatherDiv.appendChild(humidityLevel);
 }
 
+// displays the five-day forecast on the right side of the page, underneath the current conditions
 function displayFiveDayForecast(predictions) {
     fiveDayForecastDiv.innerHTML = '';
 
@@ -130,7 +132,7 @@ function displayFiveDayForecast(predictions) {
     return;
   }
   // do a for loop that increases by 1 to create the overall containers and the divs that will display the dates.
-  // below that, you'll create the other elements and set their attributes
+  // below that, create the other elements and set their attributes
   var forecastDayOne = dayjs().add(1, "day").format("M/D/YYYY");
   var forecastDayTwo = dayjs().add(2, "day").format("M/D/YYYY");
   var forecastDayThree = dayjs().add(3, "day").format("M/D/YYYY");
@@ -181,4 +183,5 @@ function displayFiveDayForecast(predictions) {
     fiveDayForecastCard.appendChild(humidityLevel);
   }
 }
+// the initial call to display the search history 
 addCitiesToPage();
