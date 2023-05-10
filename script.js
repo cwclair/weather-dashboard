@@ -46,8 +46,6 @@ searchButtonEl.addEventListener('click', getCityName);
 function getCityName(event) {
   event.preventDefault();
 
-// TO-DO: REMOVE THE EXISTING LIST CONTENT BEFORE DISPLAYING UPDATED LIST
-
   var cityName = document.querySelector('#city-name').value.trim();
   console.log(cityName);
 
@@ -87,6 +85,8 @@ function getCityName(event) {
       
     });
   });
+  let clearForm = document.getElementById('city-name');
+    clearForm.value = "";
 }
 
 // displays the current weather conditions at the top of the right side of the page
