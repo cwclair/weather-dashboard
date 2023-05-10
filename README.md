@@ -55,8 +55,7 @@ Some screenshots below. One at narrow width to show the stacking. A couple at wi
 
 ![weather dashboard at larger width, displaying conditions for Cedar Rapids](assets/screenshots/cedar-rapids-full-screen.png)
 
-![weather dashboard at narrow width, displaying conditions for South Padre Island](assets/screenshots/south-padre-narrow-screen.png)
-
+![weather dashboard at narrow width, displaying conditions for South Padre Island](assets/screenshots/spi-narrow.png)
 ## Link to Deployed Site
 
 https://cwclair.github.io/weather-dashboard

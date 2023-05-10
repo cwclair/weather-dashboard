@@ -155,7 +155,7 @@ function displayFiveDayForecast(predictions) {
 
   for (var i = 0, j = 7; i < 5; i++, j += 8) {
     var fiveDayForecastCard = document.createElement('div');
-    fiveDayForecastCard.setAttribute('class', 'card col-6 col-md-2 p-2');
+    fiveDayForecastCard.setAttribute('class', 'card col-6 col-md-2 p-3');
     fiveDayForecastDiv.append(fiveDayForecastCard);
 
     var forecastDateField = document.createElement('h5');
