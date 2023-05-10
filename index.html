@@ -10,24 +10,24 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <h1 class="mb-3">Weather Dashboard</h1>
+    <h1 class="mb-3" id="heading-row">Weather Dashboard</h1>
 <div class="row">
-<div class="col-3">   
+<div class="col-12 col-lg-3">   
     <form>
         <div class="mb-3">
-            <h3>Search by city name:</h3>
-            <h5>(or click on city in search history below)</h5>
+            <h3 class="description-text">Search by city name</h3>
+            <h5 class="description-text">(or click on city in search history below):</h5>
           <label for="city-name" class="form-label"></label>
-          <input type="text" class="form-control" id="city-name">
+          <input type="text" placeholder="What's the weather like in..." class="form-control" id="city-name">
         </div>
-        <button type="submit" class="btn btn-primary col-12" id="searchButton">Search</button>
+        <button type="submit" class="btn btn-primary col-12 mb-3" id="searchButton">Search</button>
       </form>
 <div id="searchHistoryDiv">
 
 </div>
 </div>
 
-<div class="col-9">
+<div class="col-12 col-lg-9">
 <div id="weatherDisplayDiv"></div>
 
 <div id="fiveDayForecastDiv" class="row d-flex justify-content-around"></div>

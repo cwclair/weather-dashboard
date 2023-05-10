@@ -29,6 +29,7 @@ function addCitiesToPage() {
  
   var cities = readCitiesFromStorage();
   var containerDiv = document.createElement('ul')
+  containerDiv.setAttribute('class', 'list-unstyled')
   searchHistoryDiv.appendChild(containerDiv);    
 
   for (var i = 0; i < cities.length; i++) {
@@ -175,7 +176,7 @@ function displayFiveDayForecast(predictions) {
 
     var windSpeed = document.createElement('p');
     windSpeed.textContent =
-      'Wind speed: ' + Math.ceil(predictions[j].wind.speed) + ' mph';
+      'Wind: ' + Math.ceil(predictions[j].wind.speed) + ' mph';
     fiveDayForecastCard.appendChild(windSpeed);
 
     var humidityLevel = document.createElement('p');
