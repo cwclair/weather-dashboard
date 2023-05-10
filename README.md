@@ -1,4 +1,4 @@
-# weather-dashboard
+# Weather Dashboard
 A weather dashboard that shows current conditions and five days' worth of forecasted conditions.
 
 ## User Story
